@@ -1,0 +1,86 @@
+#!/system/xbin/busybox ash
+# "THE THING"
+#Made by _Bon_Bon(@XDA)
+#All parts of this MOD and all the code in it
+#are protected by GNU GPL, version 3
+#Copyright (C) 2015 Francisco Pulido Garces (_Bon_Bon)
+#see <http://www.gnu.org/licenses/>
+ifex () {
+	if [ -e $4 ]; then $1 $2 $3 $4; fi
+}
+#-- Setting CPU governor to Ondemand
+for i in cpu0 cpu1 cpu2 cpu3 cpu4 cpu5 cpu6 cpu7; do
+	echo "ondemand" > /sys/devices/system/cpu/$i/*/scaling_governor
+done
+#-- Set frequencies and voltages
+j=1
+for i in `cat sys/devices/system/cpu/cpufreq/vdd_table | tr -d "[:space:]"`; do
+	eval "frequency$j=`echo $i | awk -F=: {print $1}`"
+	#eval "voltage$j=`echo $i | awk -F=: {print $2}`"
+	j=$(($j+1))
+done
+case $1 in
+	-v) #Place here your version information
+		echo "VERSION: 0.1b Made by _Bon_Bon" ;;
+	PURE) #Place here your modified PURE profile tweaks
+		eval optimal_max=$`echo frequency$(($j-1))`
+		eval sync_freq=$`echo frequency$j`
+		#midnumber=$((($j/2)+1))
+		#-- Tweaking the governor
+		ifex echo "50" > /sys/devices/system/*/ondemand/up_threshold
+		ifex echo "50" > /sys/devices/system/*/ondemand/up_threshold_any_cpu_load
+		ifex echo "50" > /sys/devices/system/*/ondemand/up_threshold_multi_core
+		ifex echo $sync_freq > /sys/devices/system/*/ondemand/sync_freq
+		ifex echo "3" > /sys/devices/system/*/ondemand/sampling_down_factor
+		ifex echo $optimal_max > /sys/devices/system/*/ondemand/optimal_max_freq
+		ifex echo $frequency2 > /sys/devices/system/*/ondemand/optimal_freq
+		ifex echo "7" > /sys/devices/system/*/ondemand/middle_grid_step
+		ifex echo "37" > /sys/devices/system/*/ondemand/middle_grid_load
+		ifex echo "50" > /sys/devices/system/*/ondemand/micro_freq_up_threshold
+		ifex echo "14" > /sys/devices/system/*/ondemand/high_grid_step
+		ifex echo "46" > /sys/devices/system/*/ondemand/high_grid_load
+		ifex echo "10" > /sys/devices/system/*/ondemand/down_differential_multi_core
+		ifex echo "10" > /sys/devices/system/*/ondemand/down_differential
+		ifex echo "0" > /sys/devices/system/*/ondemand/powersave_bias
+		ifex echo "1" > /sys/devices/system/*/ondemand/io_is_busy
+		ifex echo "0" > /sys/devices/system/*/ondemand/ignore_nice_load
+		#-- Tweak I/O Scheduler
+		echo "deadline" > /sys/block/mmcblk0/queue/scheduler
+		#-- Change TCP thingy
+		sysctl -e -w net.ipv4.tcp_congestion_control=cubid
+		#-- Change LMK Values
+		echo "4096,8192,16384,32768,49152,65536" > /sys/module/lowmemorykiller/parameters/minfree
+		#-- Change ADJ Values
+		echo "0,1,3,5,9,15" > /sys/module/lowmemorykiller/parameters/adj
+	;;
+	GAME) #Place here your modified GAME tweaks
+		eval optimal_max=$`echo frequency$(($j-2))`
+		eval sync_freq=$`echo frequency$(($j-2))`
+		#-- Tweaking the governor
+		ifex echo "60" > /sys/devices/system/*/ondemand/up_threshold
+		ifex echo "60" > /sys/devices/system/*/ondemand/up_threshold_any_cpu_load
+		ifex echo "60" > /sys/devices/system/*/ondemand/up_threshold_multi_core
+		ifex echo $sync_freq > /sys/devices/system/*/ondemand/sync_freq
+		ifex echo "2" > /sys/devices/system/*/ondemand/sampling_down_factor
+		ifex echo $optimal_max > /sys/devices/system/*/ondemand/optimal_max_freq
+		ifex echo $frequency2 > /sys/devices/system/*/ondemand/optimal_freq
+		ifex echo "7" > /sys/devices/system/*/ondemand/middle_grid_step
+		ifex echo "37" > /sys/devices/system/*/ondemand/middle_grid_load
+		ifex echo "60" > /sys/devices/system/*/ondemand/micro_freq_up_threshold
+		ifex echo "14" > /sys/devices/system/*/ondemand/high_grid_step
+		ifex echo "46" > /sys/devices/system/*/ondemand/high_grid_load
+		ifex echo "15" > /sys/devices/system/*/ondemand/down_differential_multi_core
+		ifex echo "15" > /sys/devices/system/*/ondemand/down_differential
+		ifex echo "1" > /sys/devices/system/*/ondemand/powersave_bias
+		ifex echo "1" > /sys/devices/system/*/ondemand/io_is_busy
+		ifex echo "0" > /sys/devices/system/*/ondemand/ignore_nice_load
+		#-- Tweak I/O Scheduler
+		echo "deadline" > /sys/block/mmcblk0/queue/scheduler
+		#-- Change TCP thingy
+		sysctl -e -w net.ipv4.tcp_congestion_control=westwood
+		#-- Change LMK Values
+		echo "2048,4096,8192,16384,24576,32768" > /sys/module/lowmemorykiller/parameters/minfree
+		#-- Change ADJ Values
+		echo "0,1,3,5,9,15" > /sys/module/lowmemorykiller/parameters/adj
+	;;
+esac
