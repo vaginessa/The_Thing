@@ -1,6 +1,0 @@
-Cl_Boot=0
-Cl_Cache=1
-Cl_Dropbox=1
-Cl_Logs=1
-Cl_Advanced=1
-Cl_Useless=1
