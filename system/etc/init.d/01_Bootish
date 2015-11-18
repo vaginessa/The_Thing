@@ -1,0 +1,43 @@
+#!/system/bin/sh
+# "THE THING"
+#Made by _Bon_Bon(@XDA)
+#All parts of this MOD and all the code in it
+#are protected by GNU GPL, version 3
+#Copyright (C) 2015 Francisco Pulido Garces (_Bon_Bon)
+#see <http://www.gnu.org/licenses/>
+#-- Call The_Things boot function --#
+The_Thing -b
+#-- Start Tim --#
+Tim
+#-- Green Heartbeat Led thing during boot --#
+RUN() {
+	LED=/sys/class/leds/led_g/brightness
+	#-- Between each brightness value change
+	SPD="sleep 0.01"
+	#-- Between each two beats
+	SPD2="sleep 0.02"
+	#-- Between the end of the two beats and a start of another two
+	SPD3="sleep 1.5"
+	for i in $(seq 5 25 255); do
+		echo $i > $LED && $SPD
+	done
+	for i in $(seq 255 -25 5); do
+		echo $i > $LED && $SPD
+	done
+	echo 0 > $LED && $SPD
+	$SPD2
+	for i in $(seq 5 25 255); do
+		echo $i > $LED && $SPD
+	done
+	for i in $(seq 255 -25 5); do
+		echo $i > $LED && $SPD
+	done
+	echo 0 > $LED && $SPD
+	$SPD3
+}
+#-- Start the loop
+while [ ! `getprop sys.boot_completed && grep "1"` -eq 1 ]; do
+	RUN
+done
+exit
+#-- Aaand DONE! --#

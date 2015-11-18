@@ -1,0 +1,5 @@
+Fs_Boot=0
+Fs_Cache=1
+Fs_Data=1
+Fs_Preload=1
+Fs_System=1

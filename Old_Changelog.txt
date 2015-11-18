@@ -1,0 +1,329 @@
+Add a logo to The_Thing
+Finish Tim and add to it
+	Profiles:
+		music mode #1
+		gps mode?
+		game mode #2
+		internet surfing mode #3
+		performance (ondemand / performance) #2
+		multitasking #3
+		charging mode & battery (deep sleep / screen off) (conservative / batterysaver) #1
+		default #4
+	calibrates battery during sleep hours if phone is charging
+	runs script off screen
+	changes profiles depending on what the user is doing
+		have a menus where the user can bind apps to different profiles
+	while charging change charging voltage -> fast 80 (max) slow 99 (half) trickle? 100-> (min)
+	suggest settings based on dumpsys power etc
+	profiles controll governors, voltages? and heat managers
+		supported governors:
+		ondemand
+		conservative
+		
+	greenify thingy?
+	kernel controller
+	I/O controller
+	TCP tweaks/changer
+	hidden settings
+	
+	
+Add a Tutorial of The_Thing
+Make the tweaks more device specific
+Add some MORE color to The_Thing
+Add promotions (Sorry :/)
+Add comments to ALL the tweaks in thething
+Make the installer progress bar more specific
+Add a bootanimation
+use wget to update adblock, mod & more:
+	updates
+	adblock
+	profiles
+
+The_Thing | If the system has crashed deletes all useradded settings to stop it from happening again.
+(That means killer list, cleaner list, etc...)
+The_Thing | Added a selfupdater feature (still in testing) make scripts run from .txt files? >> or just move all settings to .txt files and update The_Thing and Tim <<<
+	
+sys/block/*/queue & /iosched OPTIMIZE
+proc/sys/kernel* /random #OPTIMIZE
+sys/power #CPU freq table
+proc/ PID /status #name and stuff
+sys/devices/system/cpu #Cpu frequencies voltages & more
+
+			#MB1=`echo $psminfree | awk -F, '{print $1}'`;MB2=`echo $psminfree | awk -F, '{print $2}'`;MB3=`echo $psminfree | awk -F, '{print $3}'`;MB4=`echo $psminfree | awk -F, '{print $4}'`;MB5=`echo $psminfree | awk -F, '{print $5}'`;MB6=`echo $psminfree | awk -F, '{print $6}'`
+	#scminfree="$((MB1*256)),$((MB2*256)),$((MB3*256)),$((MB4*256)),$((MB5*256)),$((MB6*256))"
+			for sched in $ioschedlist; do if [ "$sched" = "$usersched" ];then userschedgood=yes; break; fi; done
+			if [ "$userschedgood" ]; then iosched=$usersched
+			elif [ "`cat /sys/block/mmcblk0/queue/scheduler | grep sio`" ]; then iosched=sio
+			elif [ "`cat /sys/block/mmcblk0/queue/scheduler | grep deadline`" ]; then iosched=deadline
+			elif [ "`cat /sys/block/mmcblk0/queue/scheduler | grep noop`" ]; then iosched=noop
+			fi
+			
+			#echo "0,1,3,5,7,15" > /sys/module/lowmemorykiller/parameters/adj
+			#if [ "$mem" -lt 512000 ]; then
+				#echo "1408,2816,3755,7040,9387,12288" > /sys/module/lowmemorykiller/parameters/minfree
+			#elif [ "$mem" -lt 1024000 ]; then
+				#echo "2560,4096,6144,12288,14336,18432" > /sys/module/lowmemorykiller/parameters/minfree
+			#elif [ "$mem" -lt 1536000 ]; then
+				#echo "3755,6144,9387,14336,17284,21240" > /sys/module/lowmemorykiller/parameters/minfree
+			#elif [ "$mem" -lt 2048000 ]; then
+				#echo "5632,9216,13234,17920,21605,31860" > /sys/module/lowmemorykiller/parameters/minfree
+			#else
+				#echo "6144,11520,16540,22400,28165,41418" > /sys/module/lowmemorykiller/parameters/minfree
+			#fi
+
+0.9.8
+Installer | Fixed some weird bugs and slimmed the code
+Installer | Fixed the Backup of Bloatware
+Installer | Added and option to disable bloatware backup
+Installer | Uninstaller now restores Ad-Block to default
+Mod | Moved all the binaries back to /system
+Mod | Made some preparations for "Tim"
+Mod | Added an bootter script to call The_Thing on boot
+Mod | Moved The_Thing, Fixer (And in the future) Tim to /system/bin
+The_Thing | Made some fixes and cosmetic changes to the menus
+The_Thing | Optimized how the menus work
+The_Thing | Merged all the basic tweak scripts into The_Thing
+The_Thing | Added the ability to call the different scripts inside The_Thing
+The_Thing | Random optimizations to commands and functions, to save space and resources
+The_Thing | Removed additional settings menu
+The_Thing | Removed Terminal Emulator
+Ram Booster | Fixed some values to reduce lag
+Smoothie | Random fixes and improvements
+Cleaner | Random fixes and improvements
+Fixer | Moved the Uninstall Menu from The_Thing to here
+Fixer | Added (Finaly!) the ability to manage Bloatware backups
+
+0.9.1
+Installer | Menu prop bug fixed (again) and other minor updates and fixes
+Installer | Slimmed the package
+Installer | Many optimizations to how the changelog is shown
+Installer | Optimizations to make the installation more simplistic
+Installer | Non-Aroma version now comes with Sqlite script and the Ad-Block
+Mod | Fixed problems with binaries
+Mod | Made the logging more precise
+Mod | Changed all available commands to use busybox, to make the mod more universal
+Mod | Cleaned the scripts
+Mod | Fixed random things
+The_Thing | Made the menus more clean, colorfull on understandable
+The_Thing | Cleaned and fixed random things
+Fixer | Now removes qrngd from system if it exsist
+98_Tweak_Engine | Lots of optimizations and fixes to read-ahead tweaks
+Ad-Block | Updated to the 01/09 version by BSDGeek_Jake
+
+0.9
+The next build will be the "Tim" update!
+Fix | Changed the file format from Windows/Dos to UNIX
+Fix | Fixed the user settings, now they're applied inside the scripts rather than in several text files. It's more space and resource conservative
+Uninstaller | Small updates and fixes
+Installer | Now only works as the bloatware remover and asks if the user wants the mod installed
+Installer | Removed the Additional tab
+Installer | Introduced .config file compability to the Non-Aroma installer. Currently does nothing, but in the future the user can use it to remove bloatware, like the AROMA installer
+Mod | Changed how the whole mod works, now everything is enabled and controlled trough The_Thing
+Mod | Added the Fixer script. It can fix some common bugs and problems in the users phone:
+	Recalibrate the proximity sensor
+	Recalibrate the battery
+	More to be added! If you have a idea, let me know!
+	
+Swap | Rebuilt inside The_Thing
+92_Cleaner | Added the included junk feature! Now user can add additional directories to be cleaned
+03_Killer | Fixes and finishing touches
+94_Ram_Booster | Fixes and finishing touches to the App lock feature
+Removed | Compability to android 2.3 Tell me if you want it back and I'll see what I can do
+
+The_Thing | It's alive! >:D Finished and fixed the whole script:
+	Moved all the scripts to /data/The_Thing
+	User can enable/disable scripts runing on boot
+	Controll all the parts of the mod, for example user can disable audio tweaks if he/she uses other audio enhancers
+	Add and remove processes killed by the Killer script
+	Add and remove directories cleaned by the Cleaner script
+	Add and remove processes locked into memory by the Ram Booster script
+	Added numbers for easier navigation
+	Added a terminal emulator
+	Uninstaller now just uninstalls the whole mod
+	Scripts can be run manually trough The_Thing or directly trough the terminal
+		Terminal commands:
+			Entropy | Entropy_engine script
+			Killer | Killer script
+			Fstrimmer | Fstrim script
+			Smooth | Smoothie script
+			Cleaner | Cleaner script
+			Booster | Ram_Booster script
+			SQOpt | Sqlite_Vacuum_Reindex script
+			Zipaligner | Zipaligner script
+			Tweaker | Tweak_Engine
+			Fixer | Fixer script
+		So basically the whole MOD operates from /data/The_Thing for easier acces and removal
+		And (maybe) compability with any other MODs (Not suggested, or supported)
+
+0.8.5
+Installer | Finished non-aroma installer
+Installer | Cleaned and slimmed the Installer paggage
+Installer | Removed aroma uninstall menu
+Installer | Fixed app backup
+Installer | Fixed fixing the fix of the aroma installer script fix
+Uninstaller | Fixes
+Fix | Fixed scripts checking user settings wrong
+94_Ram_Booster | Added VM tweaks
+Mod | Cleaned and slimmed the scripts
+Mod | Fixed some typos, if you find more don't be affareid to tell me ;)
+
+0.8
+Installer | Changed some text to explain things better
+Installer | Renamed post installation menu to additional settings and placed the adblock there
+Installer | Slimmed the install backage
+Mod | Added The_Thing script, now you can customize mod settings trough it
+Mod | Misaclinous other fixes and tweaks
+Mod | Added a proper adblock to aroma installer, you can choose from full and tiny (Thanks to BSDGeek_Jake)
+Fstrim | Updated trim binary
+Fstrim | Now trims preload too
+Fstrim | Added customisability, user can choose what gets trimmed and what doesn't
+92_Cleaner | Added customisability, user can choose what gets cleaned and what doesn't
+92_Cleaner | Minor fixes and updates
+03_Killer | Media service Killer now Killer
+03_Killer | Added customisability, user can now choose what services to kill, comes with SAFE defaults
+Zipaligner | Added customisability, user can choose what directories get aligned
+Zipaligner | Trimmed zipaligner code about to 1/3 of the original
+94_Ram_Booster | Added customisability, user can choose what gets optimized and what doesn't
+94_Ram_Booster | locked home screen app to memory
+94_Ram_Booster | Added Kernel Same page merging to ram booster script
+98_Tweak_Engine | Added customisability, user can choose what gets optimized and what doesn't
+91_Smoothie | Added customisability, user can choose what gets optimized and what doesn't
+The_Thing | Removed Entropy_Menu and rebuild it in The_Thing script
+
+0.6
+New | Added an uninstaller, supports v0.6 and up
+New | Non-Aroma installer
+Installer | Removed Samsung removal menu as it wasn't used
+
+0.5
+Mod | Cleaned and trimmed the code
+Installer | Finished /data/data removal for:
+	Music (or eleven? I don't know as they're named the same xD)
+	Cell Broadcast Reciever
+	CM Filemanager
+	Whisper Push
+	PicoTTS
+	SIM Toolkit
+	HTML viewer
+	Browser
+	AudioFX
+	Calendar
+	Camera
+	Email & Exchange services
+	cLock
+	Calculator
+	NFC Service
+	CMWalpapers
+	Black Hole Live Wallpaper
+	Bubbles Live Wallpaper
+	Music Visualization Live Wallpaper
+	Phase Beam Live wallpaper
+	Holo Spiral
+	Live Wallpapers
+	Basic Day Dreams
+	Photo Phase
+	Photo Screensavers
+	All the Google apps below
+
+Installer | Added to google removal menu:
+	Chrome Browser
+	Cloud Print
+	Gmail
+	Google+ <- No-one likes you >:p
+	Google Calendar
+	Google Desk Clock
+	Google Docs
+	Google Drive
+	Google Earth
+	Google Fitness
+	Google Keep
+	Google News & Weather
+	Google Now Launcher
+	Google Play Books
+	Google Play Games
+	Google Play Movies & TV
+	Google Play Music
+	Google Play Newsstand
+	Google Search
+	Google Sheets
+	Google Slides
+	Google Text-to-Speech
+	Google Wallet
+	Hangouts
+	Maps
+	Sound Search for Google Play
+	Street View on Google Maps
+	TalkBack
+	YouTube
+
+0.4.6
+Entropy_engine | A HUGE thanks to lambgx02 and Ryuinferno for the Entropy seeder and script
+Entropy_engine | Fixed and updated Entropy Engine, it should now be more effective and battery friendly
+Entropy_engine | Added an Entropy Menu so people can control the Entropy_engine script
+Mod | A HUGE-er thanks to BlackGunZ for the SQlite Vacuum & Reindex and Zipaligner scripts
+Mod | Fixed:
+	SQlite Vacuum & Reindex script
+	Zipaligner script
+	And so many other typos and errors
+
+0.4.5
+Mod | Fixed that "proper" logging
+Mod | Fixed some minor bugs
+Mod | Added an adblocker *Finaly, yay...*
+Mod | Added an Entropy engine
+Mod | Added SQLite database optimizer
+Mod | Added a Zipalign script
+Mod | Added A LOT of I/O & storage Tweaks
+Installer | Removed Dalvik-Cache from clean menu, as it has to be cleaned to ensure that Zipalign script works
+
+<b>0.4</b>
+92_Cleaner | Optimizations to include more junk
+98_Tweak_Engine | Added more general performance tweaks
+98_Tweak_Engine | Added more Battery tweaks
+98_Tweak_Engine | Added more GPU tweaks
+98_Tweak_Engine | Added Audio tweaks
+98_Tweak_Engine | Added more I/O tweaks
+98_Tweak_Engine | Added calling tweaks
+98_Tweak_Engine | Added more internet tweaks
+98_Tweak_Engine | Added camera tweaks
+Mod | Added a Smoothie script, to make users UI feel lightning fast
+Mod | Added a Ram_Booster script, to increase RAM speed and performance
+Mod | Added a Media server killer to save battery
+Mod | In total added about 1000 lines of tweaking awesomeness
+Mod | Included proper logging, so users can see what is going on with my tweaks, all the log as stored at /data/The_Thing/*
+Installer | Added prober removing of old files on installation
+Installer | Fixed and optimized installation UI to include better navigation
+Installer | Redid the bloatware removal menu, to include multiple tabs in preparation of version 0.5
+Installer | Added custom icons to installation UI
+
+0.3
+Mod | New name: The_Thing
+Installer | Added a new tweak menu
+Installer | Added the ability to enable/disable swap for cache
+Installer | Added a master switch for Bloatware, and tweak menu (It has to be enabled for things to get installed)
+Installer | Added some more functionality to installation
+Installer | Fixed some typos and text missing from the UI
+Installer | Cleaned and fixed stuff you can't see ;)
+(a HUGE thanks to @slaid480 for letting me use his Fly-On Mod as a starting point on how to write shell scripts)
+Mod | Added a cleaner script
+Mod | Added a fstrim script that trims /cache, /data and /system
+
+0.2.3
+Installer | Updated to AROMA 3.00b1
+Installer | Fixed setting metadata and permissions
+Installer | Fixed script not removing /data files, if user didn't run it directly after rom install (still unfinished, but the largest space hoggers are taken care of)
+Installer | Made removal menu more organised
+Installer | Added SimToolKit, Html Viewer, cClock Widget, Calculator and NFC Service to removable bloatware list
+Installer | Added a post installation menu
+Installer | Added the ability to clear cache and dalvik during installation
+Installer | Added the ability to reboot, reboot to recovery and to exit AROMA
+Installer | Added the ability to delete batterystats.bin aka. the ability to calibrate your battery (it's most effective when used at full charge)
+Installer | Cleaned up the code
+
+0.2
+Installer | Fixed script typos
+Installer | Fixed some more script typos
+Installer | Basically redid the whole script, because there were so many typos
+
+0.1
+- Initial test build

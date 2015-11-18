@@ -1,0 +1,6 @@
+AllowAutoReboot=0
+SleepStartTime=22
+SleepEndTime=07
+AllowNotificationTune=1
+Tim_Interval=60
+LowBatteryTrigger=15

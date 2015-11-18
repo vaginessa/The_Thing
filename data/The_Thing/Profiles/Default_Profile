@@ -1,0 +1,47 @@
+#!/system/xbin/busybox ash
+# "THE THING"
+#Made by _Bon_Bon(@XDA)
+#All parts of this MOD and all the code in it
+#are protected by GNU GPL, version 3
+#Copyright (C) 2015 Francisco Pulido Garces (_Bon_Bon)
+#see <http://www.gnu.org/licenses/>
+#Start_Of_Changeable_Parameters
+governor=
+#End_Of_Changeable_Parameters
+#-- Setting CPU governor to Ondemand
+for i in cpu0 cpu1 cpu2 cpu3 cpu4 cpu5 cpu6 cpu7; do
+	echo "$governor" > /sys/devices/system/cpu/$i/*/scaling_governor
+done
+#-- Tweaking the governor
+echo "80" > /sys/devices/system/*/ondemand/up_threshold
+echo "15" > /sys/devices/system/*/ondemand/down_differential
+echo "1" > /sys/devices/system/*/ondemand/io_is_busy
+echo "2" > /sys/devices/system/*/ondemand/sampling_down_factor
+echo "30000" > /sys/devices/system/*/ondemand/sampling_rate
+
+#-- Tweak I/O Scheduler
+		echo "scheduler-name" > /sys/block/mmcblk0/queue/scheduler
+		#-- Change TCP thingy
+		sysctl -e -w net.ipv4.tcp_congestion_control=cubid
+
+
+
+	ADJ_CRT () {
+		elif test "`awk -F , '{print $3}' $adjfile`" -gt 15; then
+			j=1
+			for i in `cat $adjfile | tr "," " "`; do
+				i=$(($i*17/1000)
+				eval "oomadj$j=`printf "%.0f\n" $i`"
+				j=$(($j+1))
+			done
+			oomadj6=15
+			ADJ_VER=MULTITASKING
+		else
+			for i in `cat $adjfile | tr "," " "`; do
+				eval "oomadj$j=$i"
+				j=$(($j+1))
+			done
+			ADJ_VER=MULTITASKING
+		fi
+
+	}
