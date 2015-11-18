@@ -1,4 +1,0 @@
-Cl_Interval=43200
-Fs_Interval=86400
-Op_Interval=172800
-Ki_Interval=3600

@@ -1,3 +1,0 @@
-Ra_Boot=0
-Ra_Memory=1
-Ra_Merge=1
