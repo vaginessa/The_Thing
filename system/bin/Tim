@@ -35,7 +35,7 @@ Tim () {
 		}
 		# Run Killer
 		Killer () {
-			The_Thing -k
+			The_Thing -k $1
 		}
 		# Run App Optimizer
 		Optimizer () {
@@ -142,12 +142,11 @@ Tim () {
 					state=*) DisplayState=`echo $i | awk -F= '{print $2}'`;;
 					mBatteryLevelLow=*) BatteryLevelLow=`echo $i | awk -F= '{print $2}'`;;
 					mDisplayReady=*) DisplayReady=`echo $i | awk -F= '{print $2}'`;;
+					mLastUserActivityTime=*) HowLongUseractivity=`echo $i | awk -F= '{print $2}'`; LastUseractivity=`echo $i | awk '{print $2}'`;;
 					#mSystemReady=*) SystemReady=`echo $i | awk -F= '{print $2}'`;;
 					#mLowPowerModeEnabled=*) LowPowerModeEnabled=`echo $i | awk -F= '{print $2}'`;;
 					#mLastWakeTime=*) HowLongAwake=`echo $i | awk -F= '{print $2}'`; LastTimeAwake=`echo $i | awk '{print $3}'`;;
 					#mLastSleepTime=*) HowLongAsleep=`echo $i | awk -F= '{print $2}'`; LastTimeAsleep=`echo $i | awk '{print $3}'`;;
-					#mLastUserActivityTime=*) HowLongUseractivity=`echo $i | awk -F= '{print $2}'`; LastUseractivity=`echo $i | awk '{print $3}'`;;
-					#mHoldingWakelockSuspendBlocker=*) HoldingWakelockSuspendBlocker=`echo $i | awk -F= '{print $2}'`;;
 					#mHoldingDisplaySuspendBlocker=*) HoldingDisplaySuspendBlocker=`echo $i | awk -F= '{print $2}'`;;
 					#mWakeUpWhenPluggedOrUnpluggedConfig=*) WakeOnPlugAndUnplug=`echo $i | awk -F= '{print $2}'`;;
 					#mSreenOffTimeoutSetting=*) ScreenOffTimeout=`echo $i | awk -F= '{print $2}'`;;
@@ -170,7 +169,26 @@ Tim () {
 		#-- Updates what profile should be active
 		Upd_Profile () {
 			#-- Get android process data
-			$LowBatteryTrigger
+			local UserData=/data/The_thing/Usedata
+			if [[ $LowBatteryTrigger -ge $BatteryLevel || $BatteryLevelLow = "true" ]]; then
+				ProfileUser="Battery"
+			fi
+			if [[ -s $UserData/Gaming_triggers.txt && -n `ps | grep -f $UserData/Gaming_triggers.txt` ]]; then
+				ProfileUser="Game"
+			elif [[ -s $UserData/Internet_triggers.txt && -n `ps | grep -f $UserData/Internet_triggers.txt` ]]; then
+				ProfileUser="Internet"
+			elif [[ -s $UserData/Multitasking_triggers.txt && -n `ps | grep -f $UserData/Multitasking_triggers.txt` ]] || `ps -o stat,args | grep "{" | awk '!/android.|cyanogenmod.|xposed/'`; then
+				ProfileUser="Multitasking"
+			elif [[ -s $UserData/Music_triggers.txt && -n `ps | grep -f $UserData/Music_triggers.txt` ]]; then
+				ProfileUser="Music"
+			fi
+			elif [[ -s $UserData/Performance_triggers.txt && -n `ps | grep -f $UserData/Performance_triggers.txt` ]]; then
+				if [[ `top -n1 | grep "CPU:" | awk '{printf "%.0f\n",$8}'` -le 30 && $LastUseractivity -le 200 ]]; then
+					
+				fi
+			else
+			
+			fi
 		}
 	}
 	#-_- Loops & profiles -_-#
