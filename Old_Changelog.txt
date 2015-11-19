@@ -50,7 +50,9 @@ proc/ PID /status #name and stuff
 sys/devices/system/cpu #Cpu frequencies voltages & more
 
 ro.product.cpu.abi
-and if that fails, use abilist
+and if that fails, use abilist arm x86 else mips
+
+install command!!! Similar to cp, but lets copy all files to a destination directory with atributes
 
 			#MB1=`echo $psminfree | awk -F, '{print $1}'`;MB2=`echo $psminfree | awk -F, '{print $2}'`;MB3=`echo $psminfree | awk -F, '{print $3}'`;MB4=`echo $psminfree | awk -F, '{print $4}'`;MB5=`echo $psminfree | awk -F, '{print $5}'`;MB6=`echo $psminfree | awk -F, '{print $6}'`
 	#scminfree="$((MB1*256)),$((MB2*256)),$((MB3*256)),$((MB4*256)),$((MB5*256)),$((MB6*256))"

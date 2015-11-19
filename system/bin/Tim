@@ -134,7 +134,7 @@ Tim () {
 		#-- Get ongoing user processes --#
 		GetMulti () {
 			local j=0
-			for i in `ps -o stat,args | grep "{" | grep -fvF $UserData/Ignored_processes.txt`; do #awk '!/android.|cyanogenmod.|xposed/'
+			for i in `ps -o stat,args | grep "{" | grep -fvF $UserData/Ignored_processes.txt`; do
 				if [ -s `echo $i | grep "S"` ]; then
 					local j=$(($j+1))
 				fi

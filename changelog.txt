@@ -1,20 +1,23 @@
 <b><#selectbg_g>Codename: The_Thing</#></b>
-<b>Version: 1.0b</b>
+<b>Version: 1.1 "The Cosmetic Update"</b>
+
+<b>Version: 1.0 "The Timmyfication"</b>
 
 Mod | Updated copyright text thingy, so don't go stealing my code without permission! ;P
 Mod | A new little easter egg has come to Thingify device bootups ;D (Inspired by AntaresOnes OptimizedCM Rom)
 Mod | Moved the project to GitHub. This enables faster development times and selfupdating scripts
-Installer | Made an installer script with all the features of the Aroma Installer
 Installer | Some random fixes and optimizations
-Installer | Removed non-Aroma Installer
-Installer | Made some additions to The_Thing install menu for Tim
+Installer | Removed non-Aroma Installer zip and replaced it with a script
+Installer | Added busybox binaries for arm, intel and mips
 Installer | Removed fstrim binary
-Installer | Automatically adds non system apps into killer userlist, excluding:
-	WhatsApp
-	Hangouts
-	Gmail
-	Greenify
-	Power Nap
+Installer | Added a script that runs on first reboot, after  install and sets everything up
+	Sets up busybox
+	Automatically adds non system apps into killer userlist, excluding:
+		WhatsApp
+		Hangouts
+		Gmail
+		Greenify
+		Power Nap
 
 Added | Tim, real time optimizer and booster script
 Removed | Fixer script and moved its functions into The_Thing
@@ -25,20 +28,17 @@ The_Thing | Added an loading sequence, because... It looks cool :P
 The_Thing | Optimizations to functions, commands and menus
 The_Thing | Optimizations to how the settings are changed
 The_Thing | Moved the settings inside .txt files
-The_Thing | Changed and how to call the scripts inside The_Thing
+The_Thing | Changed an optimizedcalling the scripts inside The_Thing to be more convenient and flexiable
 The_Thing | Introduced precise calling, the user can tell a script to do a certain thing
-The_Thing | Optimized calls and script parameters
 The_Thing | Random fixes and optimizations to scripts
-The_Thing | Moved some tweaks into Tim and made them more flexiable
 The_Thing | Redid the bloatware management
 The_Thing | Added some comments for code snoopers :P
 The_Thing | Removed Entropy_Engine and replaced it with a more powerfull build in random file generator tweaks
 The_Thing | Fixed some typos
-The_Thing | Additions and fixes to variables
 The_Thing | Removed the ability to run scripts inside their settings menus
 The_Thing | Made the logs date format easier to read
 The_Thing | Introduce a /System directory, all settings files that can not / should not be edited are there
-The_Thing | Added a -v call parameter. When called with -v outputs version information
+The_Thing | Added a -v call parameter. When called with it, The_THing outputs version information
 Additional_Menu | Made some fixes and "beautifications" to menu items
 Additional_Menu | Made the reboot option clean dalvik and cahce to increase stability
 Additional_Menu | Merged and updated my SwaPa script, now calculates optimized amount of Swap
@@ -50,6 +50,7 @@ Tweak_Engine | Now writes build.prop tweaks into build.prop
 Tweak_Engine | Added many network, kernel, battery, security and other tweaks
 Tweak_Engine | Optimized some tweaks
 Tweak_Engine | Added tiwlan.ini tweaks If the user doesn't have tiwlan.ini, Fixer can create it
+Tweak_Engine | Moved graphic tweaks into Smoothie
 Ram_Booster | Optimized KSM tweaks and added UKSM compability
 Ram_Booster | Changed the app lock in memory function to use, instead of local.prop, an OOM_ADJ trick to lock apps
 Ram_Booster | Moved Minfree and ADJ tweaks into Tim
@@ -64,7 +65,7 @@ Cleaner | Added cache dumping to prevent slowdowns on devices with memoryleaks
 Cleaner | Made the menus more clean, beautiful and organised
 Cleaner | Introduced changeable intervals to script runs
 Cleaner | Optimizations to functions
-Cleaner | Merged some junk types, so now there's only Useless, cache, logs, dropbox and advanced
+Cleaner | Merged some junk categories, now there's only Useless, cache, logs, dropbox and advanced
 Cleaner | Added ad files, empty folders and .tmp files as "Advanced"
 Cleaner | Added app cache files to cache cleaning. Can safe up to 1G of memory if not cleaned before!
 Cleaner | Added recent tasks to "Advanced" to prevent BSOD and to freeup RAM ( Thanks to AntareOne for the discovery)
@@ -87,7 +88,7 @@ Killer | Added a safe switch to enable and disable system apps killing and addin
 Killer | Optimizations to functions
 
 <b>Because of all the optimizations, even thou I added more than 400 lines of new tweaks</b>
-<b>AND merged Fixer script with The_Thing, the script got smaller by about 300 lines! O.O Yay code reusing, I guess...</b>
+<b>AND merged Fixer script with The_Thing, the script got smaller! O.O Yay code reusing, I guess...</b>
 
 
 <b>Tim</b> The realtime optimizer!
@@ -98,7 +99,7 @@ Added | Currently has 4 profiles, default, performance, battery and multitasking
 	Default is a user controlled profile that is enabled when no specific usage is detected
 	Performance is a performance driven profile that has two modes: Pure Performance and Gaming
 	Battery is a energy saving profile that gets enabled when the screen is off or the devices battery is low, it too has two modes: Pure Battery and Music
-	Multitasking is a profile designed to keep the lags away while the user uses many apps at the same time, it too has two modes: Multitasking and Surfing
+	Multitasking is a profile designed to keep the device lag free, while the user multitasks, it too has two modes: Multitasking and Internet
 	
 	The profiles control things like: Governors, Low Memory Killer, ADJ values, I/O schedulers and TCP Congestion
 	
@@ -111,3 +112,4 @@ Added | A menu into The_Thing to control the default profile and on what apps ar
 		Control what governor is enabled
 		Control what I/O scheduler is enabled
 		Control what minfree values and ADJ values are enabled
+		Control what governor values are set
