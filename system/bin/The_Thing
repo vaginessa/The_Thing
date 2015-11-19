@@ -235,6 +235,10 @@ EOF
 				fi
 			fi
 		}
+		#-- Control the Default_Profile --#
+		ProfileMgr () {
+			
+		}
 		#-- Creates Swap / Zram based on how much ram the device has --#
 		MakeSwap () {
 				amount=$((mem*64))

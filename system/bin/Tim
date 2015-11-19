@@ -196,7 +196,6 @@ Tim () {
 			fi
 		}
 	}
-	#-_- Loops & profiles -_-#
 	#-- Monitors Battery and Music Profiles & Runs killer and cleaner & Runs Wake_Lock_Blocker every loop
 	ScreenOff () {
 		ScreenOffRunning="true"
