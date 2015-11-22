@@ -34,6 +34,9 @@ Add promotions (Sorry :/)
 Add comments to ALL the tweaks in thething
 Make the installer progress bar more specific
 Add a bootanimation
+Make a sceen thingy for aroma installer
+Change updater scripts to use shell
+Add a proper setting changer screen to Aroma and nonaroma
 use wget to update adblock, mod & more:
 	updates
 	adblock
@@ -48,9 +51,6 @@ proc/sys/kernel* /random #OPTIMIZE
 sys/power #CPU freq table
 proc/ PID /status #name and stuff
 sys/devices/system/cpu #Cpu frequencies voltages & more
-
-ro.product.cpu.abi
-and if that fails, use abilist arm x86 else mips
 
 install command!!! Similar to cp, but lets copy all files to a destination directory with atributes
 

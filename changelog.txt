@@ -10,8 +10,7 @@ Installer | Some random fixes and optimizations
 Installer | Removed non-Aroma Installer zip and replaced it with a script
 Installer | Added busybox binaries for arm, intel and mips
 Installer | Removed fstrim binary
-Installer | Added a script that runs on first reboot, after  install and sets everything up
-	Sets up busybox
+Installer | Added a script that runs on first boot after install and sets everything up
 	Automatically adds non system apps into killer userlist, excluding:
 		WhatsApp
 		Hangouts
@@ -111,5 +110,4 @@ Added | A menu into The_Thing to control the default profile and on what apps ar
 	Default profile control:
 		Control what governor is enabled
 		Control what I/O scheduler is enabled
-		Control what minfree values and ADJ values are enabled
-		Control what governor values are set
+		Control what TCP Congestion type is enabled
