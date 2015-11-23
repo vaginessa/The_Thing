@@ -87,14 +87,18 @@ if file_getprop("/tmp/aroma/mod_tweak.prop","item.1.1")=="1" then
 	set_perm(0, 0, 0755, "/system/bin/Tim");
 	set_perm(0, 0, 0755, "/system/etc/init.d/01_Bootish");
 	if getprop("ro.ro.product.cpu.abi")=="x86" then
-		package_extract_file("Busybox/busybox_x86","/data/The_Thing/system/busybox");
-		set_perm(0, 0, 0755, "/data/The_Thing/system/busybox");
-	elif getprop("ro.ro.product.cpu.abi")=="mips"
-		package_extract_file("Busybox/busybox_mips","/data/The_Thing/system/busybox");
-		set_perm(0, 0, 0755, "/data/The_Thing/system/busybox");
+		package_extract_file("Busybox/busybox_x86","/data/The_Thing/System/busybox");
+		set_perm(0, 0, 0755, "/data/The_Thing/System/busybox");
+		ui_print("Your device is x86 based");
+	endif;
+	if getprop("ro.ro.product.cpu.abi")=="mips" && getprop("ro.ro.product.cpu.abi")!="x86" then
+		package_extract_file("Busybox/busybox_mips","/data/The_Thing/System/busybox");
+		set_perm(0, 0, 0755, "/data/The_Thing/System/busybox");
+		ui_print("Your device is mips based");
 	else
-		package_extract_file("Busybox/busybox_arm","/data/The_Thing/system/busybox");
-		set_perm(0, 0, 0755, "/data/The_Thing/system/busybox");
+		package_extract_file("Busybox/busybox_arm","/data/The_Thing/System/busybox");
+		set_perm(0, 0, 0755, "/data/The_Thing/System/busybox");
+		ui_print("Your device is arm based");
 	endif;
 else
 	set_progress(0.5);
