@@ -235,6 +235,38 @@ EOF
 				fi
 			fi
 		}
+		#-- Control the Default_Profile --#
+		ProfileMgr () {
+			clear
+			echo "Select the governor you want enabled:"
+			echo "[O]nDemand | [C]onservative"
+			echo ""
+			read choice
+			case choice in
+				O|o) local governor=Ondemand;;
+				C|c) local governor=Conservative;;
+				*) local governor=Conservative;;
+			esac
+			echo "Select the I/O Scheduler you want enabled:"
+			echo "[N]oop | [D]eadline"
+			echo ""
+			read choice
+			case choice in
+				N|n) local governor=Noop;;
+				D|d) local schedname=Deadline;;
+				*) local governor=Noop;;
+			esac
+			echo "Select the TCP Congestion type you want enabled:"
+			echo "[W]estwood | [C]bic"
+			echo ""
+			read choice
+			case choice in
+				W|w) local tcpname=Westwood;;
+				C|c) local tcpname=Cubic;;
+				*) local tcpname=Westwood;;
+			esac
+			ret=2
+		}
 		#-- Creates Swap / Zram based on how much ram the device has --#
 		MakeSwap () {
 				amount=$((mem*64))

@@ -20,51 +20,8 @@ if file_getprop("/tmp/aroma/mod_tweak.prop","item.1.1")=="1" then
 	ui_print("Installing The_Thing");
 	ui_print("Removing old files");
 	delete_recursive(
-		"/system/bin/Fixer",
-		"/system/bin/Tweaker",
-		"/system/bin/Entropy",
-		"/system/bin/Fstrimmer",
-		"/system/bin/SQOpt",
-		"/system/bin/Zipaligner",
-		"/system/bin/Killer",
-		"/system/bin/Smooth",
-		"/system/bin/Cleaner",
-		"/system/bin/Booster",
 		"/system/bin/The_Thing",
-		"/system/bin/Tim",
-		#Tweak Engine
-		"/system/etc/init.d/98_Tweaks",
-		"/system/etc/init.d/98_Tweak_Engine",
-		#Killer
-		"/system/etc/init.d/03_Media_Service_Killer",
-		"/system/etc/init.d/03_Killer",
-		#Entropy Engine
-		"/system/etc/init.d/Entropy_Engine",
-		"/system/etc/init.d/09_Entropy_Engine",
-		"/system/etc/Entropy_Backup",
-		"/system/xbin/rngd",
-		"/system/xbin/entro",
-		#Zipaligner
-		"/system/etc/init.d/95_Zipaligner",
-		"/system/etc/init.d/Zipaligner",
-		"/system/xbin/zipalign",
-		#Fstrim
-		"/system/etc/init.d/77fstrim",
-		"/system/etc/init.d/77_Fstrim",
-		"/system/etc/init.d/Fstrim",
-		"/system/xbin/fstrim",
-		#Swap
-		"/system/etc/init.d/01swapon",
-		"/system/etc/init.d/01_Swap",
-		#Sqlite Optimizer
-		"/system/etc/init.d/Sqlite_Vacuum_Reindex",
-		"/system/etc/init.d/94_Sqlite_Vacuum&Reindex",
-		"/system/xbin/sqlite3",
-		"/system/lib/libncurses.so");
-	delete_recursive("/system/etc/init.d/94_Ram_Booster");
-	delete_recursive("/system/etc/init.d/91_Smoothie");
-	delete_recursive("/system/etc/init.d/01_Settings");
-	delete_recursive("/system/etc/init.d/92_Cleaner");
+		"/system/bin/Tim");
 	delete_recursive("/system/etc/init.d/01_Bootish");
 	delete_recursive("/data/tombstones");
 	delete_recursive("/data/dalvik-cache");
@@ -123,15 +80,26 @@ if file_getprop("/tmp/aroma/mod_tweak.prop","item.1.1")=="1" then
 	set_perm_recursive(0, 2000, 0755, 0755, "/data/The_Thing");
 	#
 	#Binaries
-	set_perm(0, 2000, 0755, "/system/xbin/rngd");
-	set_perm(0, 2000, 0755, "/system/xbin/entro");
-	set_perm(0, 0, 0755, "/system/xbin/fstrim");
 	set_perm(0, 0, 06755, "/system/xbin/zipalign");
 	set_perm(0, 0, 0755, "/system/xbin/sqlite3");
 	set_perm(0, 0, 0644, "/system/lib/libncurses.so");
 	set_perm(0, 0, 0755, "/system/bin/The_Thing");
-	set_perm(0, 0, 0755, "/system/bin/Fixer");
+	set_perm(0, 0, 0755, "/system/bin/Tim");
 	set_perm(0, 0, 0755, "/system/etc/init.d/01_Bootish");
+	if getprop("ro.ro.product.cpu.abi")=="x86" then
+		package_extract_file("Busybox/busybox_x86","/data/The_Thing/System/busybox");
+		set_perm(0, 0, 0755, "/data/The_Thing/System/busybox");
+		ui_print("Your device is x86 based");
+	endif;
+	if getprop("ro.ro.product.cpu.abi")=="mips" && getprop("ro.ro.product.cpu.abi")!="x86" then
+		package_extract_file("Busybox/busybox_mips","/data/The_Thing/System/busybox");
+		set_perm(0, 0, 0755, "/data/The_Thing/System/busybox");
+		ui_print("Your device is mips based");
+	else
+		package_extract_file("Busybox/busybox_arm","/data/The_Thing/System/busybox");
+		set_perm(0, 0, 0755, "/data/The_Thing/System/busybox");
+		ui_print("Your device is arm based");
+	endif;
 else
 	set_progress(0.5);
 	run_program("/sbin/mkdir","/data/The_Thing/Backup/GENERAL");

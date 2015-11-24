@@ -35,7 +35,7 @@ Tim () {
 		}
 		# Run Killer
 		Killer () {
-			The_Thing -k
+			The_Thing -k $1
 		}
 		# Run App Optimizer
 		Optimizer () {
@@ -73,13 +73,7 @@ Tim () {
 		}
 		#-- Locks foreground processes when called
 		ProcessLock () {
-			for LOCK in `ps | awk '!/]\//&&/./{print $1}'` `cat /data/The_Thing/Userdata/Ram_Lock_data.txt`; do
-				if test "`awk '$1<=0' proc/$LOCK/oom_adj`" || "`awk '$1<=0' /proc/$LOCK/oom_score_adj`"; then
-					echo -17 > /proc/$LOCK/oom_adj
-					echo -1000 > /proc/$LOCK/oom_score_adj
-					renice -10 $LOCK
-				fi
-			done
+			The_Thing -r --LOCK
 		}
 		#-- LogEngine --#
 		Logi () {
@@ -131,6 +125,16 @@ Tim () {
 				echo "" > /data/The_Thing/System/ToastQueue.txt
 			fi
 		}
+		#-- Get ongoing user processes --#
+		GetMulti () {
+			local j=0
+			for i in `ps -o stat,args | grep "{" | grep -fvF $UserData/Ignored_processes.txt`; do
+				if [ -s `echo $i | grep "S"` ]; then
+					local j=$(($j+1))
+				fi
+			done
+			return $j
+		}
 		#-- Update Device States --#
 		Upd_State () {
 			#-- Get data from dumpsys
@@ -142,12 +146,11 @@ Tim () {
 					state=*) DisplayState=`echo $i | awk -F= '{print $2}'`;;
 					mBatteryLevelLow=*) BatteryLevelLow=`echo $i | awk -F= '{print $2}'`;;
 					mDisplayReady=*) DisplayReady=`echo $i | awk -F= '{print $2}'`;;
+					mLastUserActivityTime=*) HowLongUseractivity=`echo $i | awk -F= '{print $2}'`; LastUseractivity=`echo $i | awk '{print $2}'`;;
 					#mSystemReady=*) SystemReady=`echo $i | awk -F= '{print $2}'`;;
 					#mLowPowerModeEnabled=*) LowPowerModeEnabled=`echo $i | awk -F= '{print $2}'`;;
 					#mLastWakeTime=*) HowLongAwake=`echo $i | awk -F= '{print $2}'`; LastTimeAwake=`echo $i | awk '{print $3}'`;;
 					#mLastSleepTime=*) HowLongAsleep=`echo $i | awk -F= '{print $2}'`; LastTimeAsleep=`echo $i | awk '{print $3}'`;;
-					#mLastUserActivityTime=*) HowLongUseractivity=`echo $i | awk -F= '{print $2}'`; LastUseractivity=`echo $i | awk '{print $3}'`;;
-					#mHoldingWakelockSuspendBlocker=*) HoldingWakelockSuspendBlocker=`echo $i | awk -F= '{print $2}'`;;
 					#mHoldingDisplaySuspendBlocker=*) HoldingDisplaySuspendBlocker=`echo $i | awk -F= '{print $2}'`;;
 					#mWakeUpWhenPluggedOrUnpluggedConfig=*) WakeOnPlugAndUnplug=`echo $i | awk -F= '{print $2}'`;;
 					#mSreenOffTimeoutSetting=*) ScreenOffTimeout=`echo $i | awk -F= '{print $2}'`;;
@@ -169,11 +172,24 @@ Tim () {
 		}
 		#-- Updates what profile should be active
 		Upd_Profile () {
-			#-- Get android process data
-			$LowBatteryTrigger
+			local UserData=/data/The_thing/Usedata
+			if [[ $LowBatteryTrigger -ge $BatteryLevel || $BatteryLevelLow = "true" ]]; then
+				ProfileUser="Battery"
+			elif [[ -s $UserData/Gaming_triggers.txt && -n `ps | grep -f $UserData/Gaming_triggers.txt` ]]; then
+				ProfileUser="Game"
+			elif [[ -s $UserData/Internet_triggers.txt && -n `ps | grep -f $UserData/Internet_triggers.txt` ]]; then
+				ProfileUser="Internet"
+			elif [[ -s $UserData/Multitasking_triggers.txt && -n `ps | grep -f $UserData/Multitasking_triggers.txt` ]] || if [ `GetMulti` -ge 6 ]; then
+				ProfileUser="Multitasking"
+			elif [[ -s $UserData/Performance_triggers.txt && -n `ps | grep -f $UserData/Performance_triggers.txt` ]] || if [[ `top -n1 | grep "CPU:" | awk '{printf "%.0f\n",$8}'` -le 20 && $LastUseractivity -le 200 ]]; then
+				ProfileUser="Perfomace"
+			elif [[ -s $UserData/Music_triggers.txt && -n `ps | grep -f $UserData/Music_triggers.txt` ]]; then
+				ProfileUser="Music"
+			else
+				ProfileUser="Default"
+			fi
 		}
 	}
-	#-_- Loops & profiles -_-#
 	#-- Monitors Battery and Music Profiles & Runs killer and cleaner & Runs Wake_Lock_Blocker every loop
 	ScreenOff () {
 		ScreenOffRunning="true"

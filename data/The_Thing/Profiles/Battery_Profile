@@ -5,7 +5,6 @@
 #are protected by GNU GPL, version 3
 #Copyright (C) 2015 Francisco Pulido Garces (_Bon_Bon)
 #see <http://www.gnu.org/licenses/>
-#-- Setting CPU governor to Conservative
 ifex () {
 	if [ -e $4 ]; then $1 $2 $3 $4; fi
 }
