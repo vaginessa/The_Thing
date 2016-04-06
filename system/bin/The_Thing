@@ -1,9 +1,9 @@
 #!/system/xbin/busybox ash
-# "THE THING (The_Thing)"
+# "THE THING"
 #Made by _Bon_Bon(@XDA)
 #All parts of this MOD and all the code in it
 #are protected by GNU GPL, version 3
-#Copyright (C) 2015 Francisco Pulido Garces (_Bon_Bon)
+#Copyright (C) 2016 Francisco Pulido Garces (_Bon_Bon)
 #see <http://www.gnu.org/licenses/>
 #Delete next comment to enable debuging
 #set -x
@@ -379,10 +379,10 @@ EOF
 	#-- SuperUser checker --# MINE!
 	SuCheck () {
 		echo -e $divider
-		if [[ ! `id -u` -eq 0 || ! `id -u` = "root" ]]; then
+		if [ ! $(id -u | sed 's/[^0-9]*//g') -eq 0 ]; then
 			echo "You're not running as root!"
 			echo "Next time type \"su\" before running this script"
-			exitm exit
+			exit
 		fi
 	}
 	#-- Variables --#

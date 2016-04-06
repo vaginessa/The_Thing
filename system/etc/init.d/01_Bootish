@@ -5,10 +5,6 @@
 #are protected by GNU GPL, version 3
 #Copyright (C) 2015 Francisco Pulido Garces (_Bon_Bon)
 #see <http://www.gnu.org/licenses/>
-#-- Call The_Things boot function --#
-The_Thing -b
-#-- Start Tim --#
-Tim
 #-- Green Heartbeat Led thing during boot --#
 RUN() {
 	LED=/sys/class/leds/led_g/brightness
@@ -36,7 +32,7 @@ RUN() {
 	$SPD3
 }
 #-- Start the loop
-while [ ! `getprop sys.boot_completed && grep "1"` -eq 1 ]; do
+while [ ! $(getprop sys.boot_completed && grep "1") -eq 1 ]; do
 	RUN
 done
 exit

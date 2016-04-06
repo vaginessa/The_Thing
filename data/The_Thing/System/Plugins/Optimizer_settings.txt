@@ -1,0 +1,4 @@
+Op_Boot=0
+Op_Data=1
+Op_Sqlite=1
+Op_System=1

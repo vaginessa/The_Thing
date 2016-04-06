@@ -1,5 +1,74 @@
 <b><#selectbg_g>Codename: The_Thing</#></b>
-<b>Version: 1.1 "The Cosmetic Update"</b>
+
+<b>I hope i remembered all the changes, if you find something that I missed, please let me know</b>
+
+<b>Version: 2.0 "Such Ease, Much Rework, Wow"</b>
+
+Mod | Reworked the mod to be purely plugin orientated
+Mod | Removed Ad-Block hosts file to safe space and to avoid legal complications
+Mod | Created a thread where all the compatible mods and available plugins and profiles are listed
+Mod | Some tweaks to the scripts to make the more stable and efficient
+Mod | Updates to legal things
+Mod | Added a custom build bash binary to be used as a shell environment
+Mod | Removed old busybox builds and added new custom build ones to save space
+Mod | Made the mod use more awk and replaced some code with awk oneliners
+Installer | Added a recovery partition. If some plugin, setting profile, etc. breaks the phone or causes a bootloop, user can trough this menu:
+	Disable everything
+	Derun all system plugins and profiles
+	(All the plugins and profiles that come with this mod in install can all disable)
+	(their boosts and return the phone to the way it was before install)
+	Uninstall the whole mod
+
+Added | Adblock controller and hosts file editor plugin
+Added | App remover and bakcuper
+Fixer | Updated and reworked the menus and functionality
+The_Thing | Updates to the menu function to polish things up and to allow more complex menus
+The_Thing | Moved all tweaks into their seperate plugins
+The_Thing | Creates a list of plugins and profiles that are enabled and what are disabled during boot
+Can be changed while device is running and that update can be forced to Tim
+The_Thing | Reworked the script, now behaves as a Logger-Engine and as a unified setting controller for profiles, plugins and Tim
+	Can control things like:
+		Does the plugin run on boot
+		Plugin settings
+		Is the plugin enabled or disabled
+		Change Various little things in Tim and The_Thing
+		Profile settings
+		Is the profile enabled or disabled
+		What is the profiles priority (High priority = Overwrites other profiles if they too could be enabled)
+
+Tim | Chages to script, all tweaks and schedules prebuild into Tim moved into plugins
+Tim | Added A LOT more of variables Tim can monitor
+Tim | Some great optimizations and cleanups have taken place... it's AwwSOME
+Tim | Reworked the script, now works like a plugin
+Updater | Made some changes to allow plugins update their self
+Updater | Added a output .txt file where the user can see what updates are pending and what actions need to take place.
+Updater | If some plugins aren't compatible with the new The_Thing, add a warning to the output .txt file and backs them up
+
+<b>I've made some documents into github, where you can</b>
+<b>see how to make and profile / plugin yourself!</b>
+<b>The idea is that this mod would become an unfied platform</b>
+<b>for anyone to create and optimize their own tweaks</b>
+
+<b>Version: 1.1 "The Cnvenience update"</b>
+
+Mod | Added self updating function, if the user desires, the mod will automatically
+download and install the update during sleeping hours. After that, when the user opens
+the screen, The_Thing will notify to reboot the device and finish the update.
+When the device boots for the first time after update, a changelog is shown in a form of a bootanimation
+Mod | Added a custom bootanimation! It's cool!
+Mod | Reworked the folder structure and permissions for convenience and security
+Installer | Made the Aroma installer use a shell script instead of edify for speed and customizability
+Installer | Cleaned and fixed stuff
+Installer | Added setting customizing to Tim and The_Thing while installing
+Installer | Non-Aroma installer now a tweaked copy of the updater script
+Uninstaller | Moved from edify to shell environment for speed and customizability
+The_Thing | Added a menu function to greatly safe space, to improve speed and to make navigation A LOT smoother
+The_Thing | Made the menus more clean, organized and faster
+The_Thing | Changed how different colors are displayed
+The_Thing | Grrrrrrreat beautifications!
+Tim | Such clean, much rework, wow!
+Tim | Added an include function, people can now more conveniently add plugins with special tweaks and run conditions
+Tim | Made the profiles more convenient, it's easier for other people to add their own profiles for specific occasions
 
 <b>Version: 1.0 "The Timmyfication"</b>
 
@@ -15,8 +84,7 @@ Installer | Added a script that runs on first boot after install and sets everyt
 		WhatsApp
 		Hangouts
 		Gmail
-		Greenify
-		Power Nap
+		Email
 
 Added | Tim, real time optimizer and booster script
 Removed | Fixer script and moved its functions into The_Thing
@@ -37,7 +105,7 @@ The_Thing | Fixed some typos
 The_Thing | Removed the ability to run scripts inside their settings menus
 The_Thing | Made the logs date format easier to read
 The_Thing | Introduce a /System directory, all settings files that can not / should not be edited are there
-The_Thing | Added a -v call parameter. When called with it, The_THing outputs version information
+The_Thing | Added a -v call parameter. When called with it, The_Thing outputs version information
 Additional_Menu | Made some fixes and "beautifications" to menu items
 Additional_Menu | Made the reboot option clean dalvik and cahce to increase stability
 Additional_Menu | Merged and updated my SwaPa script, now calculates optimized amount of Swap

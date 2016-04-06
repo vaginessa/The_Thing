@@ -256,7 +256,6 @@ Tim () {
 		if [ -e /sys/kernel/fast_charge/screen_om_current_limit ]; then echo 1 > /sys/kernel/fast_charge/screen_om_current_limit; fi
 		if [ -e /sys/kernel/fast_charge/use_mtp_during_fast_charge ]; then echo 1 > /sys/kernel/fast_charge/use_mtp_during_fast_charge; fi
 		if [ -e /sys/kernel/fast_charge/failsafe ]; then echo 0 > /sys/kernel/fast_charge/failsafe; fi
-		if
 		if [ -d /sys/kernel/fast_charge ]; then
 			if [ $ChargingUSB -eq 1 ]; then
 				local CHARGING_PORT=usb

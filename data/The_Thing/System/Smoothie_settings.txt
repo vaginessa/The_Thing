@@ -1,3 +1,0 @@
-Sm_Boot=0
-Sm_UI=1 #SM
-Sm_GAME=1
