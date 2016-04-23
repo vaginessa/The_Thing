@@ -14,6 +14,12 @@ TheThing () {
 	if [ -z $1 ]; then 1=M; fi
 	#-- Set_Settings --#
 	Set_Ings () {
+		#-- Unset all variables, so they can be updated
+		for FILE in Interval Tweak_Engine Fstrim Optimizer Smoothie Cleaner Ram_Booster Killer Tim; do
+			for SETTING in $(cat /data/The_Thing/System/${FILE}_settings.txt); do
+				$SETTING
+			done
+		done
 		#-- Intervals
 		for i in `cat /data/The_Thing/System/Interval_settings.txt`; do $i; done
 		#-- Tweak Engine

@@ -95,7 +95,7 @@ The_Thing | Added an loading sequence, because... It looks cool :P
 The_Thing | Optimizations to functions, commands and menus
 The_Thing | Optimizations to how the settings are changed
 The_Thing | Moved the settings inside .txt files
-The_Thing | Changed an optimizedcalling the scripts inside The_Thing to be more convenient and flexiable
+The_Thing | Changed and optimized calling the scripts inside The_Thing to be more convenient and flexiable
 The_Thing | Introduced precise calling, the user can tell a script to do a certain thing
 The_Thing | Random fixes and optimizations to scripts
 The_Thing | Redid the bloatware management
