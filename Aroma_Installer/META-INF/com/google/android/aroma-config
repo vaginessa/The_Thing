@@ -8,6 +8,7 @@
 #
 #-- SOME THINGS
 #
+ini_set("force_colorspace","rgba");
 ini_set("rom_name",             "The_Thing");
 ini_set("rom_version",          "1.0");
 ini_set("rom_author",           "_Bon_Bon");
@@ -48,22 +49,61 @@ selectbox(
 	"ICS Theme","Ice Cream Sandwitch by DemonWav & amarullz",0,
 	"MIUI 4 Theme","MIUI 4/ICS Theme by amarullz & Lennox",0,
 	"Touchwiz","Touchwiz Theme by titanic_fanatic",1,
-	"Franzyroy","Franzyroy Theme by franzyroy",0
+	"Franzyroy","Franzyroy Theme by franzyroy",0,
+	"Material Gray","Material design themes made by Daniiiik49 and djb77",0,
+	"Material Blue"," ",0,
+	"Material Green"," ",0,
+	"Material Pink"," ",0,
+	"Material Purple"," ",0,
+	"Material Red"," ",0,
+	"Material Yellow"," ",0
 );
 if prop("theme.prop","selected.0")=="2" then
 	theme("miui");
 endif;
+
 if prop("theme.prop","selected.0")=="3" then
 	theme("ics");
 endif;
+
 if prop("theme.prop","selected.0")=="4" then
 	theme("miui4");
 endif;
+
 if prop("theme.prop","selected.0")=="5" then
 	theme("touchwiz");
 endif;
+
 if prop("theme.prop","selected.0")=="6" then
 	theme("franzyroy");
+endif;
+
+if prop("theme.prop","selected.0")=="7" then
+	theme("material_gray");
+endif;
+
+if prop("theme.prop","selected.0")=="8" then
+	theme("material_blue");
+endif;
+
+if prop("theme.prop","selected.0")=="9" then
+	theme("material_green");
+endif;
+
+if prop("theme.prop","selected.0")=="10" then
+	theme("material_pink");
+endif;
+
+if prop("theme.prop","selected.0")=="11" then
+	theme("material_purple");
+endif;
+
+if prop("theme.prop","selected.0")=="12" then
+	theme("material_red");
+endif;
+
+if prop("theme.prop","selected.0")=="13" then
+	theme("material_yellow");
 endif;
 
 ###################################################################################################################
